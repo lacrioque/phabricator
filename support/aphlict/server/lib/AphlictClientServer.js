@@ -92,8 +92,8 @@ JX.install('AphlictClientServer', {
       var server = this._server.listen.apply(this._server, arguments);
       var wss = new WebSocket.Server({server: server});
 
-      wss.on('connection', function(ws) {
-        var path = url.parse(ws.upgradeReq.url).pathname;
+      wss.on('connection', function(ws,req) {
+        var path = url.parse(req.url).pathname;
         var instance = self._parseInstanceFromPath(path);
 
         var listener = self.getListenerList(instance).addListener(ws);
